@@ -28,6 +28,47 @@ export default function Home() {
 
   const projects = [
     {
+  title: "Flight Operations Event Platform",
+  description:
+    "An event-driven platform for processing and monitoring flight operations across distributed services.",
+  tags: [
+    "Python",
+    "FastAPI",
+    "Apache Kafka",
+    "PostgreSQL",
+    "Redis",
+    "React",
+    "Docker",
+  ],
+  details: [
+    "Engineered an event-driven flight operations platform using FastAPI, Apache Kafka, and PostgreSQL to process flight, crew, gate, and operational events across distributed services.",
+    "Built RESTful APIs and asynchronous Kafka consumers with retry handling, idempotent event processing, and persistent state management to support reliable real-time updates.",
+    "Developed a React dashboard with WebSocket-based updates and Redis caching to monitor flight status, crew assignments, gate availability, and system events in real time.",
+    "Containerized services with Docker and implemented automated testing and CI/CD pipelines to validate API functionality, event-processing workflows, and service integration.",
+  ],
+},
+{
+  title: "Real-Time Drone Monitoring & Anomaly Detection",
+  description:
+    "A real-time telemetry and monitoring platform for autonomous aircraft with anomaly detection.",
+  tags: [
+    "Python",
+    "C++",
+    "ROS2",
+    "Apache Kafka",
+    "PostgreSQL",
+    "React",
+    "PyTorch",
+    "Docker",
+  ],
+  details: [
+    "Engineered a real-time drone telemetry platform using ROS2, C++, and Apache Kafka to ingest and process flight data including position, altitude, velocity, heading, and battery status.",
+    "Built asynchronous data-processing services and REST APIs to detect abnormal flight behavior, persist telemetry in PostgreSQL, and generate real-time operational alerts.",
+    "Developed a React monitoring dashboard with live telemetry visualization and historical flight analysis, enabling operators to track multiple autonomous aircraft simultaneously.",
+    "Trained and integrated an anomaly-detection model in PyTorch and containerized the system with Docker, implementing automated testing and CI/CD for reproducible deployment.",
+  ],
+},
+    {
       title: "Medical Knowledge RAG Assistant",
       description:
         "An end-to-end healthcare question-answering application that combines semantic retrieval with large language models to generate evidence-supported responses from medical knowledge sources.",
@@ -116,108 +157,144 @@ export default function Home() {
           </div>
         </div>
       </nav>
-
       {/* HERO */}
-      <section
-        id="top"
-        className="mx-auto flex min-h-screen max-w-6xl items-center px-6 pb-20 pt-32"
-      >
-        <div className="max-w-4xl">
-          <p className="mb-6 text-sm font-medium uppercase tracking-[0.2em] text-zinc-500">
-            CSE · The Ohio State University
-          </p>
+      <section className="relative min-h-[calc(100vh-80px)] overflow-hidden border-b border-zinc-200/80 bg-[#fafafa]">
+        {/* Subtle background grid */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.35]"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, #e4e4e7 1px, transparent 1px), linear-gradient(to bottom, #e4e4e7 1px, transparent 1px)",
+            backgroundSize: "64px 64px",
+          }}
+        />
 
-          <h1 className="text-5xl font-semibold leading-[1.05] tracking-[-0.04em] sm:text-6xl md:text-7xl">
-            I build software
-            <br />
-            for{" "}
-            <span className="text-zinc-400">
-              intelligent systems.
-            </span>
-          </h1>
+        {/* Soft background glow */}
+        <div className="pointer-events-none absolute -right-32 top-20 h-96 w-96 rounded-full bg-zinc-200/40 blur-3xl" />
 
-          <p className="mt-8 max-w-2xl text-lg leading-8 text-zinc-500">
-            I&apos;m an Honors Computer Science & Engineering student interested
-            in building reliable software at the intersection of{" "}
-            <span className="font-medium text-zinc-800">AI/ML</span>,{" "}
-            <span className="font-medium text-zinc-800">
-              computer vision
-            </span>
-            , and <span className="font-medium text-zinc-800">healthcare</span>.
-          </p>
+        <div className="relative mx-auto flex min-h-[calc(100vh-80px)] max-w-6xl items-center px-6 py-24">
+          <div className="grid w-full items-center gap-16 lg:grid-cols-[1.15fr_0.85fr]">
 
-          <div className="mt-10 flex flex-wrap gap-4">
-            <a
-              href="#projects"
-              className="rounded-full bg-zinc-900 px-6 py-3 text-sm font-medium text-white transition-all hover:-translate-y-0.5 hover:bg-zinc-700"
-            >
-              Explore my work
-            </a>
-
-            <a
-              href="#contact"
-              className="rounded-full border border-zinc-300 px-6 py-3 text-sm font-medium text-zinc-700 transition-all hover:-translate-y-0.5 hover:border-zinc-500"
-            >
-              Get in touch
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ABOUT */}
-      <section
-        id="about"
-        className="border-t border-zinc-200/80 bg-white"
-      >
-        <div className="mx-auto max-w-6xl px-6 py-28">
-          <div className="grid gap-12 md:grid-cols-[0.8fr_1.2fr]">
-
-            {/* Left side */}
+            {/* LEFT — INTRO */}
             <div>
-              <p className="text-sm font-medium uppercase tracking-[0.2em] text-zinc-400">
-                About
-              </p>
+              <div className="mb-8 flex items-center gap-3 text-sm font-medium uppercase tracking-[0.2em] text-zinc-400">
+                <span className="h-px w-8 bg-zinc-400" />
+                CSE · Ohio State University
+              </div>
 
-              <div className="mt-8 overflow-hidden rounded-2xl">
-                <img
-                  src="/profile.jpg"
-                  alt="Lakshmi"
-                  className="aspect-[4/5] w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
-                />
+              <h1 className="max-w-4xl text-5xl font-semibold leading-[1.02] tracking-[-0.04em] text-zinc-950 sm:text-6xl lg:text-7xl">
+                I build software
+                <br />
+                <span className="text-zinc-400">for intelligent systems.</span>
+              </h1>
+
+              <p className="mt-8 text-lg leading-8 text-zinc-600">
+  Hi! I&apos;m Lakshmi, an Honors Computer Science and Engineering student
+  at The Ohio State University, with minors in Psychology and Statistics.
+  I&apos;m interested in AI/ML and enjoy building data-driven systems that
+  turn complex problems into practical solutions for people.
+</p>
+
+              <div className="mt-10 flex flex-wrap items-center gap-4">
+                <a
+                  href="#projects"
+                  className="group inline-flex items-center gap-3 rounded-full bg-zinc-950 px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-zinc-800"
+                >
+                  View my work
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">
+                    →
+                  </span>
+                </a>
+
+                <a
+                  href="#contact"
+                  className="inline-flex items-center rounded-full border border-zinc-300 bg-white px-6 py-3 text-sm font-medium text-zinc-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-zinc-500"
+                >
+                  Get in touch
+                </a>
+              </div>
+
+              <div className="mt-14 flex flex-wrap gap-x-8 gap-y-3 text-sm text-zinc-400">
+                <span>Python</span>
+                <span>C++</span>
+                <span>Computer Vision</span>
+                <span>Machine Learning</span>
               </div>
             </div>
 
-            {/* Right side */}
-            <div>
-              <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-                Curious about how technology can make a meaningful difference.
-              </h2>
+            {/* RIGHT — TECHNICAL VISUAL */}
+            <div className="relative hidden lg:block">
+              <div className="relative mx-auto aspect-square max-w-[430px]">
 
-              <div className="mt-8 space-y-5 text-base leading-7 text-zinc-500">
-                <p>
-                  I&apos;m a Computer Science & Engineering student at The Ohio
-                  State University, with minors in Psychology and Statistics.
-                </p>
+                {/* Outer rings */}
+                <div className="absolute inset-8 rounded-full border border-zinc-200" />
+                <div className="absolute inset-20 rounded-full border border-zinc-200" />
+                <div className="absolute inset-32 rounded-full border border-zinc-300" />
 
-                <p>
-                  My interests span software engineering, machine learning,
-                  computer vision, and systems that work with real-world data.
-                  I enjoy taking problems that are messy or complex and turning
-                  them into systems that are useful, testable, and reliable.
-                </p>
+                {/* Connection lines */}
+                <div className="absolute left-1/2 top-1/2 h-px w-[78%] -translate-x-1/2 bg-zinc-300" />
+                <div className="absolute left-1/2 top-1/2 h-[78%] w-px -translate-x-1/2 -translate-y-1/2 bg-zinc-300" />
 
-                <p>
-                  Outside the classroom, I build autonomous systems with
-                  Buckeye Vertical, develop machine learning models through
-                  iGEM, and work with computational neuroimaging research at
-                  Ohio State.
-                </p>
+                {/* Center */}
+                <div className="absolute left-1/2 top-1/2 flex h-24 w-24 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-zinc-300 bg-white shadow-sm">
+                  <div className="h-3 w-3 rounded-full bg-zinc-900" />
+                </div>
+
+                {/* Nodes */}
+                <div className="absolute left-[12%] top-[25%] h-4 w-4 rounded-full border-4 border-[#fafafa] bg-zinc-800 shadow-sm" />
+                <div className="absolute right-[14%] top-[22%] h-4 w-4 rounded-full border-4 border-[#fafafa] bg-zinc-500 shadow-sm" />
+                <div className="absolute bottom-[21%] left-[17%] h-4 w-4 rounded-full border-4 border-[#fafafa] bg-zinc-500 shadow-sm" />
+                <div className="absolute bottom-[17%] right-[19%] h-4 w-4 rounded-full border-4 border-[#fafafa] bg-zinc-800 shadow-sm" />
+
+                {/* Labels */}
+                <div className="absolute left-[4%] top-[13%] text-xs font-medium uppercase tracking-[0.15em] text-zinc-400">
+                  Vision
+                </div>
+
+                <div className="absolute right-[0%] top-[12%] text-xs font-medium uppercase tracking-[0.15em] text-zinc-400">
+                  ML
+                </div>
+
+                <div className="absolute bottom-[10%] left-[3%] text-xs font-medium uppercase tracking-[0.15em] text-zinc-400">
+                  Systems
+                </div>
+
+                <div className="absolute bottom-[8%] right-[0%] text-xs font-medium uppercase tracking-[0.15em] text-zinc-400">
+                  Data
+                </div>
+
+                {/* Floating technical card */}
+                <div className="absolute left-1/2 top-1/2 w-48 -translate-x-1/2 translate-y-[82px] rounded-xl border border-zinc-200 bg-white/90 p-4 shadow-lg backdrop-blur">
+                  <div className="mb-3 flex items-center justify-between">
+                    <span className="text-xs font-medium text-zinc-400">
+                      CURRENT FOCUS
+                    </span>
+                    <span className="h-2 w-2 rounded-full bg-zinc-900" />
+                  </div>
+
+                  <p className="text-sm font-medium text-zinc-800">
+                    Building intelligent systems
+                  </p>
+
+                  <p className="mt-1 text-xs leading-5 text-zinc-400">
+                    Software · ML · Computer Vision
+                  </p>
+                </div>
               </div>
             </div>
-
           </div>
         </div>
+
+        {/* Scroll indicator */}
+        <a
+          href="#about"
+          className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs uppercase tracking-[0.2em] text-zinc-400 transition-colors hover:text-zinc-700 md:flex"
+        >
+          Scroll
+          <span className="h-8 w-px bg-zinc-300" />
+        </a>
       </section>
+
       {/* EXPERIENCE */}
       <section id="experience" className="border-t border-zinc-200/80">
         <div className="mx-auto max-w-6xl px-6 py-28">
@@ -330,34 +407,146 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* SKILLS */}
-      <section id="skills" className="border-t border-zinc-200/80">
+      <section
+        id="skills"
+        className="border-t border-zinc-200/80 bg-[#fafafa]"
+      >
         <div className="mx-auto max-w-6xl px-6 py-28">
-          <div className="grid gap-12 md:grid-cols-[0.8fr_1.2fr]">
-            <div>
-              <p className="text-sm font-medium uppercase tracking-[0.2em] text-zinc-400">
-                Skills
-              </p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight">
-                Tools I work with.
-              </h2>
+          {/* Section heading */}
+          <div className="mb-16">
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-zinc-400">
+              Skills
+            </p>
+
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl">
+              What I work with.
+            </h2>
+          </div>
+
+          <div className="space-y-12">
+            {/* LANGUAGES */}
+            <div className="grid gap-6 md:grid-cols-[0.25fr_0.75fr]">
+              <div>
+                <h3 className="text-sm font-medium uppercase tracking-[0.15em] text-zinc-400">
+                  Languages
+                </h3>
+              </div>
+
+              <div className="flex flex-wrap gap-3">
+                {[
+                  "Python",
+                  "C++",
+                  "C",
+                  "Java",
+                  "C#",
+                  "SQL",
+                  "JavaScript",
+                ].map((skill) => (
+                  <span
+                    key={skill}
+                    className="rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-400 hover:bg-zinc-50"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
             </div>
 
-            <div className="flex flex-wrap gap-x-6 gap-y-4">
-              {skills.map((skill) => (
-                <span
-                  key={skill}
-                  className="text-lg text-zinc-500 transition-colors hover:text-zinc-900"
-                >
-                  {skill}
-                </span>
-              ))}
+            {/* FRAMEWORKS & LIBRARIES */}
+            <div className="grid gap-6 border-t border-zinc-200/80 pt-12 md:grid-cols-[0.25fr_0.75fr]">
+              <div>
+                <h3 className="text-sm font-medium uppercase tracking-[0.15em] text-zinc-400">
+                  Frameworks & Libraries
+                </h3>
+              </div>
+
+              <div className="flex flex-wrap gap-3">
+                {[
+                  "FastAPI",
+                  "PyTorch",
+                  "TensorFlow",
+                  "Keras",
+                  "scikit-learn",
+                  "Pandas",
+                  "NumPy",
+                  "SciPy",
+                  "OpenCV",
+                  "Hugging Face",
+                  "LangChain",
+                  "Nilearn",
+                ].map((skill) => (
+                  <span
+                    key={skill}
+                    className="rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-400 hover:bg-zinc-50"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* TOOLS & PLATFORMS */}
+            <div className="grid gap-6 border-t border-zinc-200/80 pt-12 md:grid-cols-[0.25fr_0.75fr]">
+              <div>
+                <h3 className="text-sm font-medium uppercase tracking-[0.15em] text-zinc-400">
+                  Tools & Platforms
+                </h3>
+              </div>
+
+              <div className="flex flex-wrap gap-3">
+                {[
+                  "Git",
+                  "Docker",
+                  "Linux",
+                  "PostgreSQL",
+                  "ChromaDB",
+                  "ROS2",
+                  "TensorRT",
+                  "NVIDIA Jetson",
+                  "Jupyter",
+                ].map((skill) => (
+                  <span
+                    key={skill}
+                    className="rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-400 hover:bg-zinc-50"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* AREAS */}
+            <div className="grid gap-6 border-t border-zinc-200/80 pt-12 md:grid-cols-[0.25fr_0.75fr]">
+              <div>
+                <h3 className="text-sm font-medium uppercase tracking-[0.15em] text-zinc-400">
+                  Areas
+                </h3>
+              </div>
+
+              <div className="flex flex-wrap gap-3">
+                {[
+                  "AI / ML",
+                  "Computer Vision",
+                  "Software Engineering",
+                  "Autonomous Systems",
+                  "Scientific Computing",
+                  "Data Pipelines",
+                  "REST APIs",
+                  "Embedded Systems",
+                ].map((skill) => (
+                  <span
+                    key={skill}
+                    className="rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-400 hover:bg-zinc-50"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
-
       {/* CONTACT */}
       <section
         id="contact"
