@@ -1,6 +1,6 @@
 
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -14,17 +14,27 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const editorialSerif = Cormorant_Garamond({
+  variable: "--font-editorial",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+});
+
 export const metadata: Metadata = {
-  title: "Lakshmi Mondeddu",
+  title: "Lakshmi Mondeddu | Software Engineer & AI/ML",
   description:
-    "Lakshmi Mondeddu — Computer Science & Engineering student at The Ohio State University.",
+    "Lakshmi Mondeddu is a Computer Science and Engineering student at The Ohio State University interested in software engineering, intelligent systems, and machine learning.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${editorialSerif.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         {children}
@@ -33,4 +43,3 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     </html>
   );
 }
-
