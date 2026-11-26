@@ -2,7 +2,7 @@
 import type * as React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-type AppId = "about" | "projects" | "experience" | "skills" | "terminal";
+type AppId = "about" | "projects" | "experience" | "skills" | "contact" | "terminal";
 
 type WindowState = {
   id: AppId;
@@ -26,6 +26,7 @@ const appInfo: Record<AppId, { title: string; icon: string }> = {
   projects: { title: "Projects", icon: "projects" },
   experience: { title: "Experience", icon: "experience" },
   skills: { title: "Skills", icon: "skills" },
+  contact: { title: "Contact", icon: "contact" },
   terminal: { title: "Terminal", icon: "terminal" },
 };
 
@@ -224,6 +225,14 @@ function AppIcon({
     );
   }
 
+  if (app === "contact") {
+    return (
+      <div className={`${className} app-icon-social`}>
+        <SocialIcon type="mail" />
+      </div>
+    );
+  }
+
   return (
     <div className={className}>
       <span className="terminal-icon-symbol">&gt;_</span>
@@ -283,7 +292,7 @@ export default function Desktop() {
     { type: "output", text: "" },
   ]);
 
-  const terminalEndRef = useRef<HTMLDivElement>(null);
+  const terminalHistoryRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<{
     id: AppId;
     offsetX: number;
@@ -307,7 +316,11 @@ export default function Desktop() {
   }, []);
 
   useEffect(() => {
-    terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Scroll only the terminal's output pane. Never scroll the whole page/window.
+    const historyPane = terminalHistoryRef.current;
+    if (historyPane) {
+      historyPane.scrollTop = historyPane.scrollHeight;
+    }
   }, [terminalHistory]);
 
   const openApp = useCallback(
@@ -324,8 +337,8 @@ export default function Desktop() {
           );
         }
 
-        const width = id === "terminal" ? 760 : id === "projects" ? 820 : 700;
-        const height = id === "terminal" ? 470 : 560;
+        const width = id === "terminal" ? 760 : id === "projects" ? 820 : id === "contact" ? 900 : 700;
+        const height = id === "terminal" ? 470 : id === "contact" ? 650 : 560;
 
         return [
           ...current,
@@ -439,7 +452,7 @@ export default function Desktop() {
           "  projects    Open the Projects app",
           "  experience  Open the Experience app",
           "  skills      Show technical skills",
-          "  contact     Show contact information",
+          "  contact     Open the Contact app",
           "  clear       Clear the terminal",
           "",
         ];
@@ -481,12 +494,8 @@ export default function Desktop() {
         break;
 
       case "contact":
-        output = [
-          "Email: lakshmiamondeddu@gmail.com",
-          "GitHub: github.com/lakshmimon",
-          "LinkedIn: linkedin.com/in/lakshmimon",
-          "",
-        ];
+        openApp("contact");
+        output = ["Opening Contact...", ""];
         break;
 
       case "clear":
@@ -530,10 +539,10 @@ export default function Desktop() {
       <header className="mac-menubar">
         <div className="menubar-left">
           <span className="apple-mark">●</span>
-          <strong>Lakshmi</strong>
-          <span className="menubar-item">Portfolio</span>
-          <span className="menubar-item">File</span>
-          <span className="menubar-item">Window</span>
+          <strong>Lakshmi Mondeddu</strong>
+          {/* "<span className="menubar-item">Portfolio</span>" */}
+          {/*<span className="menubar-item">File</span>*/}
+          {/*<span className="menubar-item">Window</span>*/}
         </div>
         <div className="menubar-right">
           <span>⌘</span>
@@ -547,7 +556,7 @@ export default function Desktop() {
       </div>
 
       <section className="desktop-icons" aria-label="Desktop applications">
-        {(["about", "projects", "experience", "skills", "terminal"] as AppId[]).map(
+        {(["about", "projects", "experience", "skills", "contact", "terminal"] as AppId[]).map(
           (app) => (
             <button
               className="desktop-app"
@@ -569,9 +578,9 @@ export default function Desktop() {
             key={win.id}
             className={`mac-window mac-window-enter ${
               win.id === "terminal" ? "terminal-window" : ""
-            } ${win.maximized ? "mac-window-maximized" : ""}`}
-            style={
-              win.maximized
+            } ${win.id === "contact" ? "contact-window" : ""} ${win.maximized ? "mac-window-maximized" : ""}`}
+            style={{
+              ...(win.maximized
                 ? { zIndex: win.zIndex }
                 : {
                     left: win.x,
@@ -579,12 +588,15 @@ export default function Desktop() {
                     width: `min(${win.width}px, calc(100vw - 28px))`,
                     height: `min(${win.height}px, calc(100dvh - 100px))`,
                     zIndex: win.zIndex,
-                  }
-            }
+                  }),
+              ...(win.id === "contact" ? { background: "#ffffff", color: "#24242a", border: "1px solid rgba(0,0,0,.12)" } : {}),
+              ...(win.id === "terminal" ? { display: "flex", flexDirection: "column", minHeight: 0 } : {}),
+            }}
             onPointerDown={() => focusWindow(win.id)}
           >
             <div
               className="mac-window-header"
+              style={win.id === "contact" ? { background: "#f5f5f7", borderBottom: "1px solid #e5e5e9", color: "#55555d" } : undefined}
               onPointerDown={(event) => startDrag(event, win.id)}
               onPointerMove={moveDrag}
               onPointerUp={stopDrag}
@@ -615,18 +627,26 @@ export default function Desktop() {
               <span className="window-header-spacer" />
             </div>
 
-            <div className="mac-window-content mac-scrollbar">
+            <div
+              className="mac-window-content mac-scrollbar"
+              style={
+                win.id === "terminal"
+                  ? { display: "flex", flex: "1 1 auto", minHeight: 0, overflow: "hidden" }
+                  : undefined
+              }
+            >
               {win.id === "about" && <AboutContent />}
               {win.id === "projects" && <ProjectsContent />}
               {win.id === "experience" && <ExperienceContent />}
               {win.id === "skills" && <SkillsContent />}
+              {win.id === "contact" && <ContactContent />}
               {win.id === "terminal" && (
                 <TerminalContent
                   history={terminalHistory}
                   input={terminalInput}
                   setInput={setTerminalInput}
                   execute={executeCommand}
-                  endRef={terminalEndRef}
+                  historyRef={terminalHistoryRef}
                 />
               )}
             </div>
@@ -636,7 +656,7 @@ export default function Desktop() {
       <footer className="mac-dock-wrap">
         <div className="dock-tooltip">Click an app to open</div>
         <nav className="mac-dock" aria-label="Dock">
-          {(["about", "projects", "experience", "skills", "terminal"] as AppId[]).map(
+          {(["about", "projects", "experience", "skills", "contact", "terminal"] as AppId[]).map(
             (app) => (
               <button
                 key={app}
@@ -860,21 +880,100 @@ function SkillsContent() {
   );
 }
 
+function ContactContent() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const recipient = "lakshmiamondeddu@gmail.com";
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const subject = `Portfolio inquiry from ${name.trim()}`;
+    const body = `${message.trim()}\n\n— ${name.trim()}\n${email.trim()}`;
+    const mailto = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+  };
+
+  const fieldStyle: React.CSSProperties = {
+    width: "100%",
+    border: "1px solid #e3e3e8",
+    borderRadius: 12,
+    background: "#ffffff",
+    color: "#24242a",
+    padding: "14px 16px",
+    outline: "none",
+    fontSize: 15,
+  };
+
+  return (
+    <article
+      className="app-content mac-scrollbar"
+      style={{ background: "#ffffff", color: "#24242a", minHeight: "100%", padding: "30px clamp(22px, 5vw, 54px) 36px", overflowY: "auto" }}
+    >
+      <div style={{ maxWidth: 760, margin: "0 auto" }}>
+        <p className="eyebrow" style={{ color: "#85858e", letterSpacing: ".12em" }}>GET IN TOUCH</p>
+        <h1 className="editorial-heading" style={{ color: "#24242a", fontSize: "clamp(34px, 5vw, 46px)", margin: "8px 0 10px" }}>Say hello.</h1>
+        <p style={{ color: "#777780", lineHeight: 1.65, margin: "0 0 28px", maxWidth: 620 }}>
+          Have an opportunity, a project idea, or just want to connect? Send me a message — I’d love to hear from you.
+        </p>
+
+        <form onSubmit={handleSubmit} style={{ display: "grid", gap: 19 }}>
+          <label style={{ display: "grid", gap: 8, color: "#777780", fontSize: 14 }}>
+            Name
+            <input required autoComplete="name" value={name} onChange={(event) => setName(event.target.value)} placeholder="Your name" style={fieldStyle} />
+          </label>
+          <label style={{ display: "grid", gap: 8, color: "#777780", fontSize: 14 }}>
+            Email
+            <input required type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" style={fieldStyle} />
+          </label>
+          <label style={{ display: "grid", gap: 8, color: "#777780", fontSize: 14 }}>
+            Message
+            <textarea required rows={6} value={message} onChange={(event) => setMessage(event.target.value)} placeholder="What’s on your mind?" style={{ ...fieldStyle, resize: "vertical", minHeight: 150, lineHeight: 1.55 }} />
+          </label>
+          <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap", paddingTop: 2 }}>
+            <button type="submit" style={{ border: 0, borderRadius: 999, background: "#1677ed", color: "#ffffff", padding: "13px 28px", fontWeight: 600, fontSize: 15, cursor: "pointer" }}>
+              Send Message <span aria-hidden="true">↗</span>
+            </button>
+            <span style={{ color: "#92929b", fontSize: 13 }}>Opens your default mail app</span>
+          </div>
+        </form>
+
+        <div style={{ borderTop: "1px solid #ededf0", marginTop: 30, paddingTop: 20, display: "flex", alignItems: "center", gap: 9, flexWrap: "wrap", color: "#777780", fontSize: 14 }}>
+          <span>Prefer email?</span>
+          <a href={`mailto:${recipient}`} style={{ color: "#176fd1", textDecoration: "none", fontWeight: 500 }}>{recipient}</a>
+          <button type="button" onClick={() => void navigator.clipboard?.writeText(recipient)} style={{ border: "1px solid #e3e3e8", borderRadius: 8, padding: "5px 9px", background: "#fff", color: "#65656e", cursor: "pointer", fontSize: 12 }}>Copy</button>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 function TerminalContent({
   history,
   input,
   setInput,
   execute,
-  endRef,
+  historyRef,
 }: {
   history: TerminalLine[];
   input: string;
   setInput: (value: string) => void;
   execute: (command: string) => void;
-  endRef: React.RefObject<HTMLDivElement | null>;
+  historyRef: React.RefObject<HTMLDivElement | null>;
 }) {
   return (
-    <div className="terminal-body">
+    <div
+      className="terminal-body"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        flex: "1 1 auto",
+        minHeight: 0,
+        width: "100%",
+        height: "100%",
+        overflow: "hidden",
+      }}
+    >
       <div className="terminal-welcome">
         <p>Lakshmi Mondeddu — portfolio shell</p>
         <p>
@@ -883,7 +982,18 @@ function TerminalContent({
         </p>
       </div>
 
-      <div className="terminal-history">
+      <div
+        className="terminal-history"
+        ref={historyRef}
+        style={{
+          flex: "1 1 auto",
+          minHeight: 0,
+          overflowY: "auto",
+          overflowX: "hidden",
+          overscrollBehavior: "contain",
+          paddingRight: 8,
+        }}
+      >
         {history.map((line, index) => (
           <div
             className={`terminal-line ${
@@ -901,11 +1011,11 @@ function TerminalContent({
             )}
           </div>
         ))}
-        <div ref={endRef} />
       </div>
 
       <form
         className="terminal-input-row"
+        style={{ flex: "0 0 auto" }}
         onSubmit={(event) => {
           event.preventDefault();
           execute(input);
