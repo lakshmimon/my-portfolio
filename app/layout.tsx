@@ -1,6 +1,10 @@
 
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Cormorant_Garamond } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Cormorant_Garamond,
+} from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -21,9 +25,9 @@ const editorialSerif = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Lakshmi Mondeddu | Software Engineer & AI/ML",
+  title: "Lakshmi Mondeddu | Portfolio",
   description:
-    "Lakshmi Mondeddu is a Computer Science and Engineering student at The Ohio State University interested in software engineering, intelligent systems, and machine learning.",
+    "Explore Lakshmi Mondeddu's software engineering, AI/ML projects, technical experience, and work at The Ohio State University.",
 };
 
 export default function RootLayout({
@@ -36,7 +40,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${editorialSerif.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full">
         {children}
         <Analytics />
       </body>
