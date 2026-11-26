@@ -33,59 +33,80 @@ const appInfo: Record<AppId, { title: string; icon: string }> = {
 const projects = [
   {
     name: "FlightOps",
+    shortName: "FlightOps",
     subtitle: "Flight Operations Event Platform",
     description:
       "A full-stack event platform designed to process and manage flight-operation events. Built around a FastAPI backend, Kafka event streaming, PostgreSQL, Redis, and a React interface, with Docker supporting the development environment.",
     technologies: ["Python", "FastAPI", "Kafka", "PostgreSQL", "Redis", "React", "Docker"],
     status: "Featured project",
+    colors: ["#5ac8fa", "#0a74e8"],
+    logo: "", // e.g. "/projects/flightops.png"
   },
   {
     name: "WasteVision",
+    shortName: "WasteVision",
     subtitle: "Waste Sorting Image Classifier",
     description:
       "A computer vision project that classifies waste images into sorting categories. Uses a VGG16-based convolutional neural network and a dataset of more than 150,000 images, achieving 96% validation accuracy.",
     technologies: ["Python", "TensorFlow", "VGG16", "CNN", "Machine Learning"],
     status: "Featured project",
+    colors: ["#6ee7a0", "#12a150"],
+    logo: "",
   },
   {
     name: "Speaker Outreach Platform",
+    shortName: "Speaker Outreach",
     subtitle: "Speaker Outreach Management",
     description:
       "A platform for organizing speaker outreach and communication workflows. This project is currently in development.",
     technologies: ["Full-stack development", "Web applications"],
     status: "In development",
+    colors: ["#ffb86b", "#f2701d"],
+    logo: "",
   },
   {
     name: "FraudLens",
+    shortName: "FraudLens",
     subtitle: "Fraud Detection Analytics",
     description:
       "A machine learning project exploring fraud detection with imbalanced datasets. Includes exploratory data analysis, SMOTE-based resampling, Random Forest modeling, and ROC-AUC evaluation.",
     technologies: ["Python", "Pandas", "Scikit-learn", "SMOTE", "Random Forest"],
     status: "Project",
+    colors: ["#b69cff", "#6c4ae0"],
+    logo: "",
   },
   {
     name: "Medical Image Classification",
+    shortName: "Medical Imaging",
     subtitle: "Deep Learning for Medical Imaging",
     description:
       "A computer vision project focused on classifying medical images using deep learning techniques.",
     technologies: ["Python", "Deep Learning", "Computer Vision"],
     status: "Project",
+    colors: ["#ff8fa3", "#e0334f"],
+    logo: "",
   },
   {
     name: "Intraoperative Physiological Event Intelligence",
+    shortName: "IntraOp Events",
     subtitle: "Physiological Event Analysis",
     description:
       "A project exploring the analysis of physiological events and the use of data-driven methods to identify meaningful patterns in clinical data.",
     technologies: ["Python", "Data Analysis", "Machine Learning"],
     status: "Project",
+    colors: ["#5eead4", "#0f9488"],
+    logo: "",
   },
   {
     name: "MedKnowledge AI",
+    shortName: "MedKnowledge AI",
     subtitle: "Medical Knowledge RAG Assistant",
     description:
       "A retrieval-augmented generation assistant designed to make medical knowledge easier to search and explore. Built using a retrieval pipeline, embeddings, a vector database, and an application interface.",
     technologies: ["Python", "LangChain", "Hugging Face", "ChromaDB", "FastAPI", "Streamlit"],
     status: "Project",
+    colors: ["#fcd34d", "#d98a06"],
+    logo: "",
   },
 ];
 
@@ -277,6 +298,76 @@ function SocialIcon({ type }: { type: "mail" | "github" | "linkedin" }) {
         d="M17 25h8v25h-8V25Zm4-12a4.6 4.6 0 1 1 0 9.2 4.6 4.6 0 0 1 0-9.2ZM30 25h7.7v3.4h.1c1.1-2 3.7-4.1 7.6-4.1 8.1 0 9.6 5.3 9.6 12.2V50h-8V37.9c0-2.9-.1-6.7-4.1-6.7s-4.8 3.2-4.8 6.5V50H30V25Z"
       />
     </svg>
+  );
+}
+
+function ProjectGlyph({ name }: { name: string }) {
+  const common = {
+    fill: "none",
+    stroke: "#fff",
+    strokeWidth: 4,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
+
+  switch (name) {
+    case "FlightOps": // paper plane
+      return <g {...common}><path d="M8 30 56 10 40 54 30 36Z" /><path d="M30 36 56 10" /></g>;
+    case "WasteVision": // eye
+      return (
+        <g {...common}>
+          <path d="M6 32c8-14 20-20 26-20s18 6 26 20c-8 14-20 20-26 20S14 46 6 32Z" />
+          <circle cx="32" cy="32" r="8" />
+        </g>
+      );
+    case "Speaker Outreach Platform": // microphone
+      return (
+        <g {...common}>
+          <rect x="25" y="9" width="14" height="26" rx="7" />
+          <path d="M16 30c0 10 7 17 16 17s16-7 16-17M32 47v9" />
+        </g>
+      );
+    case "FraudLens": // magnifier
+      return <g {...common}><circle cx="28" cy="28" r="16" /><path d="M40 40l16 16" /></g>;
+    case "Medical Image Classification": // medical cross
+      return <g {...common}><path d="M26 12h12v14h14v12H38v14H26V38H12V26h14Z" /></g>;
+    case "Intraoperative Physiological Event Intelligence": // heartbeat
+      return <g {...common}><path d="M6 34h14l6-16 10 32 6-16h16" /></g>;
+    case "MedKnowledge AI": // book
+      return <g {...common}><path d="M10 14h18c4 0 6 2 6 6v32c0-3-2-5-6-5H10Z" /><path d="M54 14H36c-4 0-2 2-2 6v32c0-3 2-5 6-5h14Z" /></g>;
+    default:
+      return <g {...common}><rect x="12" y="12" width="40" height="40" rx="8" /></g>;
+  }
+}
+
+function ProjectIcon({
+  project,
+  size = 76,
+}: {
+  project: (typeof projects)[number];
+  size?: number;
+}) {
+  return (
+    <div
+      style={{
+        width: size,
+        height: size,
+        borderRadius: size * 0.23,
+        background: `linear-gradient(145deg, ${project.colors[0]}, ${project.colors[1]})`,
+        boxShadow: "0 6px 16px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.35)",
+        display: "grid",
+        placeItems: "center",
+        overflow: "hidden",
+      }}
+    >
+      {project.logo ? (
+        <img src={project.logo} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+      ) : (
+        <svg viewBox="0 0 64 64" width={size * 0.58} height={size * 0.58} aria-hidden="true">
+          <ProjectGlyph name={project.name} />
+        </svg>
+      )}
+    </div>
   );
 }
 
@@ -539,10 +630,10 @@ export default function Desktop() {
       <header className="mac-menubar">
         <div className="menubar-left">
           <span className="apple-mark">●</span>
-          <strong>Lakshmi Mondeddu</strong>
-          {/* "<span className="menubar-item">Portfolio</span>" */}
-          {/*<span className="menubar-item">File</span>*/}
-          {/*<span className="menubar-item">Window</span>*/}
+          <strong>Lakshmi</strong>
+          <span className="menubar-item">Portfolio</span>
+          <span className="menubar-item">File</span>
+          <span className="menubar-item">Window</span>
         </div>
         <div className="menubar-right">
           <span>⌘</span>
@@ -760,9 +851,49 @@ function AboutContent() {
 }
 
 function ProjectsContent() {
-  const [expandedProject, setExpandedProject] = useState<string | null>(
-    projects[0].name
-  );
+  const [selected, setSelected] = useState<string | null>(null);
+  const project = projects.find((p) => p.name === selected);
+
+  if (project) {
+    return (
+      <article className="app-content">
+        <button
+          className="project-back"
+          onClick={() => setSelected(null)}
+          style={{
+            border: 0,
+            background: "transparent",
+            color: "#1677ed",
+            cursor: "pointer",
+            fontSize: 14,
+            padding: 0,
+            marginBottom: 18,
+          }}
+        >
+          ← All Projects
+        </button>
+
+        <div style={{ display: "flex", gap: 18, alignItems: "center", marginBottom: 18 }}>
+          <ProjectIcon project={project} size={84} />
+          <div>
+            <p className="eyebrow">{project.status.toUpperCase()}</p>
+            <h1 className="editorial-heading" style={{ margin: "4px 0" }}>
+              {project.name}
+            </h1>
+            <p className="muted-text" style={{ margin: 0 }}>{project.subtitle}</p>
+          </div>
+        </div>
+
+        <p>{project.description}</p>
+        <div className="tag-list">
+          {project.technologies.map((technology) => (
+            <span className="tag" key={technology}>{technology}</span>
+          ))}
+        </div>
+        <span className="github-placeholder">GitHub link coming soon</span>
+      </article>
+    );
+  }
 
   return (
     <article className="app-content">
@@ -770,53 +901,43 @@ function ProjectsContent() {
       <h1 className="editorial-heading">Projects</h1>
       <p className="muted-text">
         A collection of things I’ve built, explored, and am currently working on.
-        Select a project to learn more.
+        Click a project to learn more.
       </p>
 
-      <div className="project-list">
-        {projects.map((project, index) => {
-          const expanded = expandedProject === project.name;
-
-          return (
-            <div className="project-card" key={project.name}>
-              <button
-                className="project-card-button"
-                onClick={() =>
-                  setExpandedProject(expanded ? null : project.name)
-                }
-                aria-expanded={expanded}
-              >
-                <span className="project-number">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className="project-title-group">
-                  <strong>{project.name}</strong>
-                  <span>{project.subtitle}</span>
-                </span>
-                <span className="project-status">{project.status}</span>
-                <span className={`project-chevron ${expanded ? "rotated" : ""}`}>
-                  ⌄
-                </span>
-              </button>
-
-              {expanded && (
-                <div className="project-details">
-                  <p>{project.description}</p>
-                  <div className="tag-list">
-                    {project.technologies.map((technology) => (
-                      <span className="tag" key={technology}>
-                        {technology}
-                      </span>
-                    ))}
-                  </div>
-                  <span className="github-placeholder">
-                    GitHub link coming soon
-                  </span>
-                </div>
-              )}
-            </div>
-          );
-        })}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(130px, 1fr))",
+          gap: 22,
+          marginTop: 26,
+        }}
+      >
+        {projects.map((p) => (
+          <button
+            key={p.name}
+            className="project-tile"
+            onClick={() => setSelected(p.name)}
+            aria-label={`Open ${p.name}`}
+            style={{
+              border: 0,
+              background: "transparent",
+              cursor: "pointer",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 10,
+              padding: 8,
+              color: "inherit",
+              textAlign: "center",
+            }}
+          >
+            <ProjectIcon project={p} />
+            <span style={{ fontSize: 13, fontWeight: 600, lineHeight: 1.25 }}>{p.shortName}</span>
+            {p.status === "In development" && (
+              <span style={{ fontSize: 11, opacity: 0.6, marginTop: -6 }}>In development</span>
+            )}
+          </button>
+        ))}
       </div>
     </article>
   );
