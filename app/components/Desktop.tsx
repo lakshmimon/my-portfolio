@@ -33,86 +33,65 @@ const appInfo: Record<AppId, { title: string; icon: string }> = {
 const projects = [
   {
     name: "FlightOps",
-    shortName: "FlightOps",
     subtitle: "Flight Operations Event Platform",
     description:
       "A full-stack event platform designed to process and manage flight-operation events. Built around a FastAPI backend, Kafka event streaming, PostgreSQL, Redis, and a React interface, with Docker supporting the development environment.",
     technologies: ["Python", "FastAPI", "Kafka", "PostgreSQL", "Redis", "React", "Docker"],
     status: "Featured project",
-    colors: ["#5ac8fa", "#0a74e8"],
-    logo: "", // e.g. "/projects/flightops.png"
   },
   {
     name: "WasteVision",
-    shortName: "WasteVision",
     subtitle: "Waste Sorting Image Classifier",
     description:
       "A computer vision project that classifies waste images into sorting categories. Uses a VGG16-based convolutional neural network and a dataset of more than 150,000 images, achieving 96% validation accuracy.",
     technologies: ["Python", "TensorFlow", "VGG16", "CNN", "Machine Learning"],
     status: "Featured project",
-    colors: ["#6ee7a0", "#12a150"],
-    logo: "",
   },
   {
     name: "Speaker Outreach Platform",
-    shortName: "Speaker Outreach",
     subtitle: "Speaker Outreach Management",
     description:
       "A platform for organizing speaker outreach and communication workflows. This project is currently in development.",
     technologies: ["Full-stack development", "Web applications"],
     status: "In development",
-    colors: ["#ffb86b", "#f2701d"],
-    logo: "",
   },
   {
     name: "FraudLens",
-    shortName: "FraudLens",
     subtitle: "Fraud Detection Analytics",
     description:
       "A machine learning project exploring fraud detection with imbalanced datasets. Includes exploratory data analysis, SMOTE-based resampling, Random Forest modeling, and ROC-AUC evaluation.",
     technologies: ["Python", "Pandas", "Scikit-learn", "SMOTE", "Random Forest"],
     status: "Project",
-    colors: ["#b69cff", "#6c4ae0"],
-    logo: "",
   },
   {
     name: "Medical Image Classification",
-    shortName: "Medical Imaging",
     subtitle: "Deep Learning for Medical Imaging",
     description:
       "A computer vision project focused on classifying medical images using deep learning techniques.",
     technologies: ["Python", "Deep Learning", "Computer Vision"],
     status: "Project",
-    colors: ["#ff8fa3", "#e0334f"],
-    logo: "",
   },
   {
     name: "Intraoperative Physiological Event Intelligence",
-    shortName: "IntraOp Events",
     subtitle: "Physiological Event Analysis",
     description:
       "A project exploring the analysis of physiological events and the use of data-driven methods to identify meaningful patterns in clinical data.",
     technologies: ["Python", "Data Analysis", "Machine Learning"],
     status: "Project",
-    colors: ["#5eead4", "#0f9488"],
-    logo: "",
   },
   {
     name: "MedKnowledge AI",
-    shortName: "MedKnowledge AI",
     subtitle: "Medical Knowledge RAG Assistant",
     description:
       "A retrieval-augmented generation assistant designed to make medical knowledge easier to search and explore. Built using a retrieval pipeline, embeddings, a vector database, and an application interface.",
     technologies: ["Python", "LangChain", "Hugging Face", "ChromaDB", "FastAPI", "Streamlit"],
     status: "Project",
-    colors: ["#fcd34d", "#d98a06"],
-    logo: "",
   },
 ];
 
 const experiences = [
   {
-    role: "Software Engineer Team Member",
+    role: "Software Engineer",
     organization: "Buckeye Vertical",
     date: "2026 – Present",
     description:
@@ -213,10 +192,11 @@ function AppIcon({
   if (app === "projects") {
     return (
       <div className={className}>
-        <svg viewBox="0 0 64 64" aria-hidden="true">
-          <rect x="7" y="9" width="50" height="46" rx="12" fill="#eaf5ff" />
-          <path d="M7 21h50" stroke="#b6d8f5" strokeWidth="2" />
-          <path d="M17 31h30M17 38h22M17 45h26" stroke="#3289d8" strokeWidth="3" strokeLinecap="round" />
+        <svg viewBox="0 0 64 64" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <rect x="7" y="6" width="50" height="52" rx="9" fill="#ffffff" />
+          <path d="M7 15a9 9 0 0 1 9-9h32a9 9 0 0 1 9 9v8H7Z" fill="#ffd60a" />
+          <path d="M16 31h32M16 39h32M16 47h24" stroke="#d5d7dc" strokeWidth="2.4" strokeLinecap="round" />
+          <rect x="7.5" y="6.5" width="49" height="51" rx="8.5" fill="none" stroke="#d9d9df" />
         </svg>
       </div>
     );
@@ -225,11 +205,15 @@ function AppIcon({
   if (app === "experience") {
     return (
       <div className={className}>
-        <svg viewBox="0 0 64 64" aria-hidden="true">
-          <rect x="10" y="17" width="44" height="35" rx="7" fill="#d9e8ff" />
-          <path d="M23 17v-5h18v5" fill="none" stroke="#fff" strokeWidth="4" />
-          <path d="M10 29h44" stroke="#75a8e8" strokeWidth="3" />
-          <path d="M28 27h8v7h-8z" fill="#4b87d1" />
+        <svg viewBox="0 0 64 64" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M33.7 17.1c-2.1 0-5.4-2.4-8.8-2.3-4.5.1-8.7 2.6-11 6.6-4.7 8.1-1.2 20.2 3.4 26.8 2.2 3.2 4.8 6.7 8.2 6.6 3.3-.1 4.6-2.1 8.6-2.1 4 0 5.1 2.1 8.7 2 3.6-.1 6-3.1 8.1-6.4 2.6-3.6 3.6-7.1 3.7-7.3-.1 0-7-2.8-7.1-10.4-.1-6.8 5.6-10.2 5.9-10.4-3.1-4.6-8-5.2-9.7-5.3-4.1-.4-8 2.4-10 2.4z"
+            fill="#c4c8ff"
+          />
+          <path
+            d="M39.5 10.7c1.7-2 2.8-4.9 2.5-7.7-2.5.1-5.4 1.6-7.1 3.6-1.5 1.8-3 4.6-2.6 7.4 2.7.2 5.5-1.3 7.2-3.3z"
+            fill="#c4c8ff"
+          />
         </svg>
       </div>
     );
@@ -298,76 +282,6 @@ function SocialIcon({ type }: { type: "mail" | "github" | "linkedin" }) {
         d="M17 25h8v25h-8V25Zm4-12a4.6 4.6 0 1 1 0 9.2 4.6 4.6 0 0 1 0-9.2ZM30 25h7.7v3.4h.1c1.1-2 3.7-4.1 7.6-4.1 8.1 0 9.6 5.3 9.6 12.2V50h-8V37.9c0-2.9-.1-6.7-4.1-6.7s-4.8 3.2-4.8 6.5V50H30V25Z"
       />
     </svg>
-  );
-}
-
-function ProjectGlyph({ name }: { name: string }) {
-  const common = {
-    fill: "none",
-    stroke: "#fff",
-    strokeWidth: 4,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-  };
-
-  switch (name) {
-    case "FlightOps": // paper plane
-      return <g {...common}><path d="M8 30 56 10 40 54 30 36Z" /><path d="M30 36 56 10" /></g>;
-    case "WasteVision": // eye
-      return (
-        <g {...common}>
-          <path d="M6 32c8-14 20-20 26-20s18 6 26 20c-8 14-20 20-26 20S14 46 6 32Z" />
-          <circle cx="32" cy="32" r="8" />
-        </g>
-      );
-    case "Speaker Outreach Platform": // microphone
-      return (
-        <g {...common}>
-          <rect x="25" y="9" width="14" height="26" rx="7" />
-          <path d="M16 30c0 10 7 17 16 17s16-7 16-17M32 47v9" />
-        </g>
-      );
-    case "FraudLens": // magnifier
-      return <g {...common}><circle cx="28" cy="28" r="16" /><path d="M40 40l16 16" /></g>;
-    case "Medical Image Classification": // medical cross
-      return <g {...common}><path d="M26 12h12v14h14v12H38v14H26V38H12V26h14Z" /></g>;
-    case "Intraoperative Physiological Event Intelligence": // heartbeat
-      return <g {...common}><path d="M6 34h14l6-16 10 32 6-16h16" /></g>;
-    case "MedKnowledge AI": // book
-      return <g {...common}><path d="M10 14h18c4 0 6 2 6 6v32c0-3-2-5-6-5H10Z" /><path d="M54 14H36c-4 0-2 2-2 6v32c0-3 2-5 6-5h14Z" /></g>;
-    default:
-      return <g {...common}><rect x="12" y="12" width="40" height="40" rx="8" /></g>;
-  }
-}
-
-function ProjectIcon({
-  project,
-  size = 76,
-}: {
-  project: (typeof projects)[number];
-  size?: number;
-}) {
-  return (
-    <div
-      style={{
-        width: size,
-        height: size,
-        borderRadius: size * 0.23,
-        background: `linear-gradient(145deg, ${project.colors[0]}, ${project.colors[1]})`,
-        boxShadow: "0 6px 16px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.35)",
-        display: "grid",
-        placeItems: "center",
-        overflow: "hidden",
-      }}
-    >
-      {project.logo ? (
-        <img src={project.logo} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-      ) : (
-        <svg viewBox="0 0 64 64" width={size * 0.58} height={size * 0.58} aria-hidden="true">
-          <ProjectGlyph name={project.name} />
-        </svg>
-      )}
-    </div>
   );
 }
 
@@ -851,49 +765,9 @@ function AboutContent() {
 }
 
 function ProjectsContent() {
-  const [selected, setSelected] = useState<string | null>(null);
-  const project = projects.find((p) => p.name === selected);
-
-  if (project) {
-    return (
-      <article className="app-content">
-        <button
-          className="project-back"
-          onClick={() => setSelected(null)}
-          style={{
-            border: 0,
-            background: "transparent",
-            color: "#1677ed",
-            cursor: "pointer",
-            fontSize: 14,
-            padding: 0,
-            marginBottom: 18,
-          }}
-        >
-          ← All Projects
-        </button>
-
-        <div style={{ display: "flex", gap: 18, alignItems: "center", marginBottom: 18 }}>
-          <ProjectIcon project={project} size={84} />
-          <div>
-            <p className="eyebrow">{project.status.toUpperCase()}</p>
-            <h1 className="editorial-heading" style={{ margin: "4px 0" }}>
-              {project.name}
-            </h1>
-            <p className="muted-text" style={{ margin: 0 }}>{project.subtitle}</p>
-          </div>
-        </div>
-
-        <p>{project.description}</p>
-        <div className="tag-list">
-          {project.technologies.map((technology) => (
-            <span className="tag" key={technology}>{technology}</span>
-          ))}
-        </div>
-        <span className="github-placeholder">GitHub link coming soon</span>
-      </article>
-    );
-  }
+  const [expandedProject, setExpandedProject] = useState<string | null>(
+    projects[0].name
+  );
 
   return (
     <article className="app-content">
@@ -901,43 +775,53 @@ function ProjectsContent() {
       <h1 className="editorial-heading">Projects</h1>
       <p className="muted-text">
         A collection of things I’ve built, explored, and am currently working on.
-        Click a project to learn more.
+        Select a project to learn more.
       </p>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(130px, 1fr))",
-          gap: 22,
-          marginTop: 26,
-        }}
-      >
-        {projects.map((p) => (
-          <button
-            key={p.name}
-            className="project-tile"
-            onClick={() => setSelected(p.name)}
-            aria-label={`Open ${p.name}`}
-            style={{
-              border: 0,
-              background: "transparent",
-              cursor: "pointer",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 10,
-              padding: 8,
-              color: "inherit",
-              textAlign: "center",
-            }}
-          >
-            <ProjectIcon project={p} />
-            <span style={{ fontSize: 13, fontWeight: 600, lineHeight: 1.25 }}>{p.shortName}</span>
-            {p.status === "In development" && (
-              <span style={{ fontSize: 11, opacity: 0.6, marginTop: -6 }}>In development</span>
-            )}
-          </button>
-        ))}
+      <div className="project-list">
+        {projects.map((project, index) => {
+          const expanded = expandedProject === project.name;
+
+          return (
+            <div className="project-card" key={project.name}>
+              <button
+                className="project-card-button"
+                onClick={() =>
+                  setExpandedProject(expanded ? null : project.name)
+                }
+                aria-expanded={expanded}
+              >
+                <span className="project-number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="project-title-group">
+                  <strong>{project.name}</strong>
+                  <span>{project.subtitle}</span>
+                </span>
+                <span className="project-status">{project.status}</span>
+                <span className={`project-chevron ${expanded ? "rotated" : ""}`}>
+                  ⌄
+                </span>
+              </button>
+
+              {expanded && (
+                <div className="project-details">
+                  <p>{project.description}</p>
+                  <div className="tag-list">
+                    {project.technologies.map((technology) => (
+                      <span className="tag" key={technology}>
+                        {technology}
+                      </span>
+                    ))}
+                  </div>
+                  <span className="github-placeholder">
+                    GitHub link coming soon
+                  </span>
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </article>
   );
@@ -1005,14 +889,40 @@ function ContactContent() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [mailtoHref, setMailtoHref] = useState("");
+  const [copyStatus, setCopyStatus] = useState("");
   const recipient = "lakshmiamondeddu@gmail.com";
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const cleanName = name.trim();
+    const cleanEmail = email.trim();
+    const cleanMessage = message.trim();
+
+    if (!cleanName || !cleanEmail || !cleanMessage) return;
+
+    const subject = `Portfolio inquiry from ${cleanName}`;
+    const body = `${cleanMessage}\n\n— ${cleanName}\n${cleanEmail}`;
+    const mailto = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    // Keep a visible fallback link in case the browser has no mail handler configured.
+    setMailtoHref(mailto);
+    setCopyStatus("");
+    window.location.assign(mailto);
+  };
+
+  const copyMessage = async () => {
     const subject = `Portfolio inquiry from ${name.trim()}`;
     const body = `${message.trim()}\n\n— ${name.trim()}\n${email.trim()}`;
-    const mailto = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
+    const draft = `To: ${recipient}\nSubject: ${subject}\n\n${body}`;
+
+    try {
+      await navigator.clipboard.writeText(draft);
+      setCopyStatus("Email draft copied.");
+    } catch {
+      setCopyStatus("Clipboard access is unavailable in this browser.");
+    }
   };
 
   const fieldStyle: React.CSSProperties = {
@@ -1059,10 +969,20 @@ function ContactContent() {
           </div>
         </form>
 
+        {mailtoHref && (
+          <div role="status" style={{ marginTop: 18, padding: 14, borderRadius: 12, background: "#f5f7fb", color: "#55555d", fontSize: 14, lineHeight: 1.6 }}>
+            If your email app didn’t open, <a href={mailtoHref} style={{ color: "#176fd1", fontWeight: 600, textDecoration: "none" }}>click here to open your email draft</a>. You can also copy the draft below.
+            <div style={{ marginTop: 10 }}>
+              <button type="button" onClick={copyMessage} style={{ border: "1px solid #d9dce4", borderRadius: 8, padding: "7px 11px", background: "#fff", color: "#55555d", cursor: "pointer", fontSize: 13 }}>Copy email draft</button>
+              {copyStatus && <span style={{ marginLeft: 10, fontSize: 12 }}>{copyStatus}</span>}
+            </div>
+          </div>
+        )}
+
         <div style={{ borderTop: "1px solid #ededf0", marginTop: 30, paddingTop: 20, display: "flex", alignItems: "center", gap: 9, flexWrap: "wrap", color: "#777780", fontSize: 14 }}>
           <span>Prefer email?</span>
           <a href={`mailto:${recipient}`} style={{ color: "#176fd1", textDecoration: "none", fontWeight: 500 }}>{recipient}</a>
-          <button type="button" onClick={() => void navigator.clipboard?.writeText(recipient)} style={{ border: "1px solid #e3e3e8", borderRadius: 8, padding: "5px 9px", background: "#fff", color: "#65656e", cursor: "pointer", fontSize: 12 }}>Copy</button>
+          <button type="button" onClick={() => void navigator.clipboard?.writeText(recipient)} style={{ border: "1px solid #e3e3e8", borderRadius: 8, padding: "5px 9px", background: "#fff", color: "#65656e", cursor: "pointer", fontSize: 12 }}>Copy address</button>
         </div>
       </div>
     </article>
